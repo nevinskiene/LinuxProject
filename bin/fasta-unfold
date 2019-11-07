@@ -1,0 +1,8 @@
+#!/bin/sh
+
+input=
+for input in "$@"
+do
+awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' < ${input} > ../outputs/${input}.output
+done
+echo done
