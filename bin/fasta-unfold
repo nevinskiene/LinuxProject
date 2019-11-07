@@ -1,8 +1,9 @@
 #!/bin/sh
 
-input=
-for input in "$@"
+filename=
+for filename in ../inputs/*.fsa
 do
-awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' < ${input} > ../outputs/${input}.output
+basename "$filename"
+f="$(basename -- $filename)"
+awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' < ${filename} > ../outputs/${f}.output
 done
-echo done
