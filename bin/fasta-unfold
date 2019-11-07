@@ -1,9 +1,15 @@
 #!/bin/sh
 
 filename=
+if pwd=!*/yeast-GC/bin 
+then
+cd bin
+fi
+
 for filename in ../inputs/*.fsa
 do
 basename "$filename"
 f="$(basename -- $filename)"
 awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' < ${filename} > ../outputs/${f}.output
+
 done
