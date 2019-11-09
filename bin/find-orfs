@@ -1,0 +1,8 @@
+#!/bin/bash
+
+filename=
+for filename in "../outputs/*.output"
+do
+echo "ORFS in" ${filename}
+grep -Eo --color=auto 'ATG[A,T,C,G]{150}*T(A(A|G)|GA)' ${filename}
+done

@@ -1,11 +1,6 @@
 #!/bin/sh
 
-filename=
-if pwd=!*/yeast-GC/bin 
-then
-cd bin
-fi
-
+cd "${0%/*}"
 for filename in ../inputs/*.fsa
 do
 basename "$filename"
