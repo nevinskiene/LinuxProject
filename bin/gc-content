@@ -1,0 +1,13 @@
+#!/bin/sh
+
+file=
+
+for file in "$@"
+
+do
+cat ${file} | grep . | awk '{ print length }' > ~/ilgis.tmp
+sed 's/[^C\|G]//g' ${file} | awk '{ print length }' > ~/gc.tmp
+paste  ~/gc.tmp ~/ilgis.tmp| awk '{ printf "%.4f\n" ,$1/$2 }'
+rm -f ~/ilgis.tmp
+rm -f ~/gc.tmp
+done

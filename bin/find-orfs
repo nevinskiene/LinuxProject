@@ -9,8 +9,7 @@ do
 basename "$filename"
 f="$(basename -- $filename)"
 grep -oPi 'ATG(.{3}(?<!TAG|TAA|TGA)){50,}?(T(A(A|G)|GA)){1}' ${filename} | \
-sed 's/\(.*\).../\1/' | \
-sed 's/.\{3\}/& /g' > ../outputs/${f}.ORFS #adding spaces between codons to make it readable
+sed 's/\(.*\).../\1/' > ../outputs/${f}.ORFS
 sed -i '/N/d' ../outputs/${f}.ORFS 	#eliminating all orfs with N in seq
 sed -i '/n/d' ../outputs/${f}.ORFS 	#eliminating all orfs with n in seq
 cat ../outputs/${f}.ORFS
