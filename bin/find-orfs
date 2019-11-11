@@ -2,15 +2,16 @@
 
 #Finding ORF and trimming STOP codon since its not part of ORF and wont be translated
 
-cd "${0%/*}"
+file=
 
-for filename in ../outputs/*.output
+for file in "$@"
 do
-basename "$filename"
-f="$(basename -- $filename)"
-grep -oPi 'ATG(.{3}(?<!TAG|TAA|TGA)){50,}?(T(A(A|G)|GA)){1}' ${filename} | \
-sed 's/\(.*\).../\1/' > ../outputs/${f}.ORFS
-sed -i '/N/d' ../outputs/${f}.ORFS 	#eliminating all orfs with N in seq
-sed -i '/n/d' ../outputs/${f}.ORFS 	#eliminating all orfs with n in seq
-cat ../outputs/${f}.ORFS
+basename "$file"
+f="$(basename -- $file)"
+grep -oPi 'ATG(.{3}(?<!TAG|TAA|TGA)){50,}?(T(A(A|G)|GA)){1}' ${file} | \
+sed 's/\(.*\).../\1/' > ${f}.tmp
+sed -i '/N/d' ${f}.tmp	#eliminating all orfs with N in seq
+sed -i '/n/d' ${f}.tmp  #eliminating all orfs with n in seq
+cat ${f}.tmp
+rm ${f}.tmp
 done

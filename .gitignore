@@ -1,1 +1,4 @@
 *.txt
+.tmp
+*.png
+README.md

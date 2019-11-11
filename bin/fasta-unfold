@@ -5,6 +5,6 @@ for filename in ../inputs/*.fsa
 do
 basename "$filename"
 f="$(basename -- $filename)"
-awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' < ${filename} > ../outputs/${f}.output
-
+awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' < ${filename} > ../outputs/${f}.unfolded
+mv "../outputs/${f}.unfolded" "`echo ../outputs/${f}.unfolded | sed 's/.fsa//'`"
 done
