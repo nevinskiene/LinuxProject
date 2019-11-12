@@ -1,3 +1,7 @@
 *.txt
 .tmp
 README.md
+*.aux
+*.dvi
+*.log
+*.tmp
