@@ -5,14 +5,14 @@ GC = ${FSA:inputs/%.fsa=outputs/%.gc}
 PNG = ${FSA:inputs/%.fsa=images/%.png}
 EPS = ${FSA:inputs/%.fsa=images/%.eps}
 
-all: $(OUT) $(GC) $(PNG) $(EPS)
-
+all: $(OUT) $(GC) $(PNG) $(EPS) GC_Content_in_yeast.pdf slides_GC_yeast_bozena.pdf
 .SUFFIXES:
 
 unfolded: ${OUT}
 orfs: ${ORF}
 pngs: ${PNG}
 eps: ${EPS}
+pdf: $(PDF)
 
 outputs/%.unfolded:
 	bin/fasta-unfold
@@ -30,3 +30,14 @@ images/%.png: outputs/%.gc
 images/%.eps: images/%.png
 	pngtopnm $< | pnmtops > $@
 	rm $<
+
+# Tex > PDF
+
+%.dvi: %.tex ${EPS}
+	latex $<
+
+%.ps: %.dvi
+	dvips $<
+
+%.pdf: %.ps
+	ps2pdf $<
